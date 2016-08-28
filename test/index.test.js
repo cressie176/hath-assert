@@ -25,7 +25,7 @@ function assertFalsey(t, done) {
   testHath('1 is not falsey', t, done).assertFalsey(1)
 }
 
-function assertError(t, done) {
+function assertNotError(t, done) {
   testHath('Oh Noes!!!', t, done).assertNotError(new Error('Oh Noes!!!'))
 }
 
@@ -49,7 +49,7 @@ module.exports = Hath.suite('Hath Assert', [
   assertNotMatches,
   assertTruthy,
   assertFalsey,
-  assertError
+  assertNotError
 ]);
 
 if (module === require.main) {
