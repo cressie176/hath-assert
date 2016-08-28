@@ -2,93 +2,36 @@ var Hath = require('..')()
 var format = require('util').format
 
 function assertEquals(t, done) {
-  new Hath({
-    fail: function(label, actual) {
-      var expected = '1 does not equal 2'
-      t.assert(actual === expected, format('"%s" != "%s"', actual, expected))
-      done()
-    },
-    pass: function(label) {
-      t.assert(false, format('Did not fail'))
-      done()
-    }
-  }).assertEquals(1, 2)
+  testHath('1 does not equal 2', t, done).assertEquals(1, 2)
 }
 
 function assertNotEquals(t, done) {
-  new Hath({
-    fail: function(label, actual) {
-      var expected = '1 equals 1'
-      t.assert(actual === expected, format('"%s" != "%s"', actual, expected))
-      done()
-    },
-    pass: function(label) {
-      t.assert(false, format('Did not fail'))
-      done()
-    }
-  }).assertNotEquals(1, 1)
+  testHath('1 equals 1', t, done).assertNotEquals(1, 1)
 }
 
 function assertMatches(t, done) {
-  new Hath({
-    fail: function(label, actual) {
-      var expected = '2 does not match /1/'
-      t.assert(actual === expected, format('"%s" != "%s"', actual, expected))
-      done()
-    },
-    pass: function(label) {
-      t.assert(false, format('Did not fail'))
-      done()
-    }
-  }).assertMatches(/1/, 2)
+  testHath('2 does not match /1/', t, done).assertMatches(/1/, 2)
 }
 
 function assertNotMatches(t, done) {
-  new Hath({
-    fail: function(label, actual) {
-      var expected = '1 matches /1/'
-      t.assert(actual === expected, format('"%s" != "%s"', actual, expected))
-      done()
-    },
-    pass: function(label) {
-      t.assert(false, format('Did not fail'))
-      done()
-    }
-  }).assertNotMatches(/1/, 1)
+  testHath('1 matches /1/', t, done).assertNotMatches(/1/, 1)
 }
 
 function assertTruthy(t, done) {
-  new Hath({
-    fail: function(label, actual) {
-      var expected = '0 is not truthy'
-      t.assert(actual === expected, format('"%s" != "%s"', actual, expected))
-      done()
-    },
-    pass: function(label) {
-      t.assert(false, format('Did not fail'))
-      done()
-    }
-  }).assertTruthy(0)
+  testHath('0 is not truthy', t, done).assertTruthy(0)
 }
 
 function assertFalsey(t, done) {
-  new Hath({
-    fail: function(label, actual) {
-      var expected = '1 is not falsey'
-      t.assert(actual === expected, format('"%s" != "%s"', actual, expected))
-      done()
-    },
-    pass: function(label) {
-      t.assert(false, format('Did not fail'))
-      done()
-    }
-  }).assertFalsey(1)
+  testHath('1 is not falsey', t, done).assertFalsey(1)
 }
 
 function assertError(t, done) {
-  new Hath({
+  testHath('Oh Noes!!!', t, done).assertNotError(new Error('Oh Noes!!!'))
+}
+
+function testHath(expected, t, done) {
+  return new Hath({
     fail: function(label, actual) {
-      var expected = 'Oh Noes!!!'
       t.assert(actual === expected, format('"%s" != "%s"', actual, expected))
       done()
     },
@@ -96,7 +39,7 @@ function assertError(t, done) {
       t.assert(false, format('Did not fail'))
       done()
     }
-  }).assertNotError(new Error('Oh Noes!!!'))
+  })
 }
 
 module.exports = Hath.suite('Hath Assert', [
