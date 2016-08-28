@@ -8,4 +8,3 @@ A set of assertion helpers for [hath](https://github.com/stringtree/hath)
 * t.assertTruthy(&lt;any&gt;, [&lt;printf template&gt;])
 * t.assertFalsey(&lt;any&gt;, [&lt;printf template&gt;])
 * t.assertError(&lt;any&gt;, [&lt;printf template&gt;])
-* 
