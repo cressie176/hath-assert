@@ -1,13 +1,11 @@
 # hath-asserts
-
 A set of assertion helpers for [hath](https://github.com/stringtree/hath)
 
-* t.assertEquals(<any>, <any>, [<printf template>])
-* t.assertNotEquals(<any>, <any>, [<printf template>])
-* t.assertMatches(<RegExp>, <any>, [<printf template>])
-* t.assertNotMatches(<RegExp>, <any>, [<printf template>])
-* t.assertTruthy(<any>, [<printf template>])
-* t.assertFalsey(<any>, [<printf template>])
-* t.assertError(<any>, [<printf template>])
-
-
+* t.assertEquals(&lt;any&gt;, &lt;any&gt;, [&lt;printf template&gt;])
+* t.assertNotEquals(&lt;any&gt;, &lt;any&gt;, [&lt;printf template&gt;])
+* t.assertMatches(&lt;RegExp&gt;, &lt;any&gt;, [&lt;printf template&gt;])
+* t.assertNotMatches(&lt;RegExp&gt;, &lt;any&gt;, [&lt;printf template&gt;])
+* t.assertTruthy(&lt;any&gt;, [&lt;printf template&gt;])
+* t.assertFalsey(&lt;any&gt;, [&lt;printf template&gt;])
+* t.assertError(&lt;any&gt;, [&lt;printf template&gt;])
+* 
