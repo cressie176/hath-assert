@@ -41,6 +41,10 @@ module.exports = function(_Hath) {
     }
   });
 
+  Hath.helper('assertPlan', function(plan, message) {
+    return this.assert(plan === (this.npass + this.nfail), message || format('%s does not equal %s', plan, this.npass + this.nfail))
+  });
+
 
   return Hath
 }
