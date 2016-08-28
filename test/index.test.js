@@ -36,7 +36,7 @@ function testHath(expected, t, done) {
       done()
     },
     pass: function(label) {
-      t.assert(false, format('Did not fail'))
+      t.assert(false, 'Did not fail')
       done()
     }
   })
