@@ -8,4 +8,5 @@ A set of assertion helpers for [hath](https://github.com/stringtree/hath)
 * t.assertTruthy(&lt;any&gt;, [&lt;message&gt;])
 * t.assertFalsey(&lt;any&gt;, [&lt;message&gt;])
 * t.assertError(&lt;any&gt;, [&lt;message&gt;])
+* t.assertThrows(&lt;function&gt;, [&lt;RegExp&gt;])
 

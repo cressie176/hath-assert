@@ -29,6 +29,14 @@ function assertNotError(t, done) {
   testHath('Oh Noes!!!', t, done).assertNotError(new Error('Oh Noes!!!'))
 }
 
+function assertThrows(t, done) {
+  testHath('Did not throw an error', t, done).assertThrows(function() {})
+}
+
+function assertThrowsMessage(t, done) {
+  testHath('Oh Noes!!! does not match /foo/', t, done).assertThrows(function() { throw new Error('Oh Noes!!!')}, /foo/)
+}
+
 function testHath(expected, t, done) {
   return new Hath({
     fail: function(label, actual) {
@@ -49,7 +57,9 @@ module.exports = Hath.suite('Hath Assert', [
   assertNotMatches,
   assertTruthy,
   assertFalsey,
-  assertNotError
+  assertNotError,
+  assertThrows,
+  assertThrowsMessage
 ]);
 
 if (module === require.main) {

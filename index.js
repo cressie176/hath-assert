@@ -12,12 +12,12 @@ module.exports = function(_Hath) {
     return this.assert(a !== b, message || format('%s equals %s', a, b))
   });
 
-  Hath.helper('assertMatches', function(a, b, message) {
-    return this.assert(a.test(b), message || format('%s does not match %s', b, a))
+  Hath.helper('assertMatches', function(regexp, a, message) {
+    return this.assert(new RegExp(regexp).test(a), message || format('%s does not match %s', a, regexp))
   });
 
-  Hath.helper('assertNotMatches', function(a, b, message) {
-    return this.assert(!a.test(b), message || format('%s matches %s', b, a))
+  Hath.helper('assertNotMatches', function(regexp, a, message) {
+    return this.assert(!new RegExp(regexp).test(a), message || format('%s matches %s', a, regexp))
   });
 
   Hath.helper('assertTruthy', function(a, message) {
@@ -31,6 +31,16 @@ module.exports = function(_Hath) {
   Hath.helper('assertNotError', function(err, message) {
     return this.assert(!err, message || err && err.message)
   });
+
+  Hath.helper('assertThrows', function(fn, regexp) {
+    try {
+      fn()
+      return this.assert(false, 'Did not throw an error')
+    } catch(err) {
+      return regexp ? this.assert(new RegExp(regexp).test(err), format('%s does not match %s', err.message, regexp)) : false
+    }
+  });
+
 
   return Hath
 }
