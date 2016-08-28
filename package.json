@@ -15,5 +15,17 @@
   "license": "ISC",
   "dependencies": {
     "hath": "^1.0.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guidesmiths/hath-assert.git"
+  },
+  "bugs": {
+    "url": "https://github.com/guidesmiths/hath-assert/issues"
+  },
+  "homepage": "https://github.com/guidesmiths/hath-assert#readme"
 }
