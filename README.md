@@ -19,7 +19,7 @@ const Hath = require('hath-assert')()
 
 function testFoo(t, done) {
     t.assertEquals(1, 1)
-    t.assertPlan(1)
+    done()
 }
 
 module.exports = Hath.suite('Hath Assert Example', [
