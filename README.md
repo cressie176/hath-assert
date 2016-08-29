@@ -29,5 +29,4 @@ module.exports = Hath.suite('Hath Assert Example', [
 if (module === require.main) {
   module.exports(new Hath());
 }
-
 ```
