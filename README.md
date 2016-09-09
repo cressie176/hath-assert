@@ -1,7 +1,7 @@
 # hath-asserts
 [![Build Status](https://img.shields.io/travis/guidesmiths/hath-assert/master.svg)](https://travis-ci.org/guidesmiths/hath-assert)
 
-A set of assertion helpers for [hath](https://github.com/stringtree/hath)
+A set of assertion helpers for [hath](https://github.com/stringtree/hath). PRs welcome.
 
 ## API
 * require('hath-assert')([&lt;Hath&gt;])
