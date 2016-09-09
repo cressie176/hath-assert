@@ -1,8 +1,9 @@
 # hath-asserts
+[![Build Status](https://img.shields.io/travis/guidesmiths/hath-assert/master.svg)](https://travis-ci.org/guidesmiths/hath-assert)
+
 A set of assertion helpers for [hath](https://github.com/stringtree/hath)
 
 ## API
-
 * require('hath-assert')([&lt;Hath&gt;])
 * t.assertEquals(&lt;any&gt;, &lt;any&gt;, [&lt;message&gt;])
 * t.assertNotEquals(&lt;any&gt;, &lt;any&gt;, [&lt;message&gt;])

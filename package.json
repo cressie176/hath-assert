@@ -4,7 +4,8 @@
   "description": "A set of hath assertions",
   "main": "index.js",
   "scripts": {
-    "test": "node test/index.test.js"
+    "test": "node test/index.test.js",
+    "prepush": "npm test"
   },
   "keywords": [
     "hath",
@@ -19,7 +20,9 @@
   "directories": {
     "test": "test"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "husky": "^0.11.7"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/guidesmiths/hath-assert.git"

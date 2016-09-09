@@ -59,8 +59,7 @@ module.exports = Hath.suite('Hath Assert', [
   assertFalsey,
   assertNotError,
   assertThrows,
-  assertThrowsMessage,
-  assertPlan
+  assertThrowsMessage
 ]);
 
 if (module === require.main) {
