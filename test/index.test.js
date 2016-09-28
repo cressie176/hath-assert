@@ -1,7 +1,8 @@
 var Hath = require('..')()
 var format = require('util').format
+var report = require('hath-report-spec')
 
-function assertEquals(t, done) {
+function shouldAssertEquals(t, done) {
   t.assertEquals(1, 1)
   t.assertEquals('a', 'a')
   fails('1 is not equal to 1', t).assertEquals(1, '1')
@@ -9,7 +10,7 @@ function assertEquals(t, done) {
   done()
 }
 
-function assertNotEquals(t, done) {
+function shouldAssertNotEquals(t, done) {
   t.assertNotEquals(1, 2)
   t.assertNotEquals('a', 'b')
   t.assertNotEquals(1, '1')
@@ -17,7 +18,7 @@ function assertNotEquals(t, done) {
   done()
 }
 
-function assertGreater(t, done) {
+function shouldAssertGreater(t, done) {
   t.assertGreater(2, 1)
   t.assertGreater('b', 'a')
   t.assertGreater(new Date(2000), new Date(1000))
@@ -26,7 +27,7 @@ function assertGreater(t, done) {
   done()
 }
 
-function assertNotGreater(t, done) {
+function shouldAssertNotGreater(t, done) {
   t.assertNotGreater(1, 1)
   t.assertNotGreater(1, 2)
   t.assertNotGreater(1, '1')
@@ -38,7 +39,7 @@ function assertNotGreater(t, done) {
   done()
 }
 
-function assertLess(t, done) {
+function shouldAssertLess(t, done) {
   t.assertLess(1, 2)
   t.assertLess('a', 'b')
   t.assertLess(new Date(1000), new Date(2000))
@@ -47,7 +48,7 @@ function assertLess(t, done) {
   done()
 }
 
-function assertNotLess(t, done) {
+function shouldAssertNotLess(t, done) {
   t.assertNotLess(1, 1)
   t.assertNotLess(2, 1)
   t.assertNotLess(1, '1')
@@ -59,19 +60,19 @@ function assertNotLess(t, done) {
   done()
 }
 
-function assertMatches(t, done) {
+function shouldAssertMatches(t, done) {
   t.assertMatches(/1/, 1)
   fails('2 does not match /1/', t).assertMatches(/1/, 2)
   done()
 }
 
-function assertNotMatches(t, done) {
+function shouldAssertNotMatches(t, done) {
   t.assertNotMatches(/1/, 2)
   fails('1 matches /1/', t).assertNotMatches(/1/, 1)
   done()
 }
 
-function assertTruthy(t, done) {
+function shouldAssertTruthy(t, done) {
   t.assertTruthy(true)
   t.assertTruthy(1)
   t.assertTruthy([])
@@ -85,7 +86,7 @@ function assertTruthy(t, done) {
   done()
 }
 
-function assertFalsey(t, done) {
+function shouldAssertFalsey(t, done) {
   t.assertFalsey(false)
   t.assertFalsey(0)
   t.assertFalsey(null)
@@ -98,14 +99,14 @@ function assertFalsey(t, done) {
   done()
 }
 
-function assertNotError(t, done) {
+function shouldAssertNotError(t, done) {
   t.assertNotError(null)
   t.assertNotError(undefined)
   fails('Oh Noes!!!', t).assertNotError(new Error('Oh Noes!!!'))
   done()
 }
 
-function assertThrows(t, done) {
+function shouldAssertThrows(t, done) {
   t.assertThrows(function() {
     throw new Error('Oh Noes!')
   })
@@ -113,7 +114,7 @@ function assertThrows(t, done) {
   done()
 }
 
-function assertThrowsMessage(t, done) {
+function shouldAssertThrowsMessage(t, done) {
   t.assertThrows(function() {
     throw new Error('Oh Noes!')
   }, /Oh Noes/)
@@ -133,21 +134,21 @@ function fails(expected, t) {
 }
 
 module.exports = Hath.suite('Hath Assert', [
-  assertEquals,
-  assertNotEquals,
-  assertGreater,
-  assertNotGreater,
-  assertLess,
-  assertNotLess,
-  assertMatches,
-  assertNotMatches,
-  assertTruthy,
-  assertFalsey,
-  assertNotError,
-  assertThrows,
-  assertThrowsMessage
+  shouldAssertEquals,
+  shouldAssertNotEquals,
+  shouldAssertGreater,
+  shouldAssertNotGreater,
+  shouldAssertLess,
+  shouldAssertNotLess,
+  shouldAssertMatches,
+  shouldAssertNotMatches,
+  shouldAssertTruthy,
+  shouldAssertFalsey,
+  shouldAssertNotError,
+  shouldAssertThrows,
+  shouldAssertThrowsMessage
 ]);
 
 if (module === require.main) {
-  module.exports(new Hath());
+  module.exports(new Hath(report));
 }

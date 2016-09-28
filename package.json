@@ -15,7 +15,8 @@
   "author": "GuideSmiths Ltd",
   "license": "ISC",
   "dependencies": {
-    "hath": "^1.0.0"
+    "hath": "^1.0.1",
+    "hath-report-spec": "^0.1.0"
   },
   "directories": {
     "test": "test"
