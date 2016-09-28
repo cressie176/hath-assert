@@ -5,11 +5,27 @@ module.exports = function(_Hath) {
   var Hath = _Hath || require('hath')
 
   Hath.helper('assertEquals', function(a, b, message) {
-    return this.assert(a === b, message || format('%s does not equal %s', a, b))
+    return this.assert(a === b, message || format('%s is not equal to %s', a, b))
   });
 
   Hath.helper('assertNotEquals', function(a, b, message) {
-    return this.assert(a !== b, message || format('%s equals %s', a, b))
+    return this.assert(a !== b, message || format('%s is equal to %s', a, b))
+  });
+
+  Hath.helper('assertGreater', function(a, b, message) {
+    return this.assert(a > b, message || format('%s is not greater than %s', a, b))
+  });
+
+  Hath.helper('assertNotGreater', function(a, b, message) {
+    return this.assert(a <= b, message || format('%s is greater than or equal to %s', a, b))
+  });
+
+  Hath.helper('assertLess', function(a, b, message) {
+    return this.assert(a < b, message || format('%s is not less than %s', a, b))
+  });
+
+  Hath.helper('assertNotLess', function(a, b, message) {
+    return this.assert(a >= b, message || format('%s is less than or equal to %s', a, b))
   });
 
   Hath.helper('assertMatches', function(regexp, a, message) {

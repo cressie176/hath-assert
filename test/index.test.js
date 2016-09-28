@@ -2,50 +2,132 @@ var Hath = require('..')()
 var format = require('util').format
 
 function assertEquals(t, done) {
-  testHath('1 does not equal 2', t, done).assertEquals(1, 2)
+  t.assertEquals(1, 1)
+  t.assertEquals('a', 'a')
+  fails('1 is not equal to 1', t).assertEquals(1, '1')
+  fails('1 is not equal to 2', t).assertEquals(1, 2)
+  done()
 }
 
 function assertNotEquals(t, done) {
-  testHath('1 equals 1', t, done).assertNotEquals(1, 1)
+  t.assertNotEquals(1, 2)
+  t.assertNotEquals('a', 'b')
+  t.assertNotEquals(1, '1')
+  fails('1 is equal to 1', t).assertNotEquals(1, 1)
+  done()
+}
+
+function assertGreater(t, done) {
+  t.assertGreater(2, 1)
+  t.assertGreater('b', 'a')
+  t.assertGreater(new Date(2000), new Date(1000))
+  fails('1 is not greater than 1', t).assertGreater(1, 1)
+  fails('1 is not greater than 2', t).assertGreater(1, 2)
+  done()
+}
+
+function assertNotGreater(t, done) {
+  t.assertNotGreater(1, 1)
+  t.assertNotGreater(1, 2)
+  t.assertNotGreater(1, '1')
+  t.assertNotGreater('a', 'b')
+  t.assertNotGreater(new Date(1000), new Date(1000))
+  t.assertNotGreater(new Date(1000), new Date(2000))
+  fails('2 is greater than or equal to 1', t).assertNotGreater(2, 1)
+  fails('b is greater than or equal to a', t).assertNotGreater('b', 'a')
+  done()
+}
+
+function assertLess(t, done) {
+  t.assertLess(1, 2)
+  t.assertLess('a', 'b')
+  t.assertLess(new Date(1000), new Date(2000))
+  fails('1 is not less than 1', t).assertLess(1, 1)
+  fails('2 is not less than 1', t).assertLess(2, 1)
+  done()
+}
+
+function assertNotLess(t, done) {
+  t.assertNotLess(1, 1)
+  t.assertNotLess(2, 1)
+  t.assertNotLess(1, '1')
+  t.assertNotLess('b', 'a')
+  t.assertNotLess(new Date(1000), new Date(1000))
+  t.assertNotLess(new Date(2000), new Date(1000))
+  fails('1 is less than or equal to 2', t).assertNotLess(1, 2)
+  fails('a is less than or equal to b', t).assertNotLess('a', 'b')
+  done()
 }
 
 function assertMatches(t, done) {
-  testHath('2 does not match /1/', t, done).assertMatches(/1/, 2)
+  t.assertMatches(/1/, 1)
+  fails('2 does not match /1/', t).assertMatches(/1/, 2)
+  done()
 }
 
 function assertNotMatches(t, done) {
-  testHath('1 matches /1/', t, done).assertNotMatches(/1/, 1)
+  t.assertNotMatches(/1/, 2)
+  fails('1 matches /1/', t).assertNotMatches(/1/, 1)
+  done()
 }
 
 function assertTruthy(t, done) {
-  testHath('0 is not truthy', t, done).assertTruthy(0)
+  t.assertTruthy(true)
+  t.assertTruthy(1)
+  t.assertTruthy([])
+  t.assertTruthy('yes')
+
+  fails('false is not truthy', t).assertTruthy(false)
+  fails('0 is not truthy', t).assertTruthy(0)
+  fails('null is not truthy', t).assertTruthy(null)
+  fails('undefined is not truthy', t).assertTruthy(undefined)
+  fails(' is not truthy', t).assertTruthy('')
+  done()
 }
 
 function assertFalsey(t, done) {
-  testHath('1 is not falsey', t, done).assertFalsey(1)
+  t.assertFalsey(false)
+  t.assertFalsey(0)
+  t.assertFalsey(null)
+  t.assertFalsey(undefined)
+  t.assertFalsey('')
+
+  fails('true is not falsey', t).assertFalsey(true)
+  fails('1 is not falsey', t).assertFalsey(1)
+  fails('yes is not falsey', t).assertFalsey('yes')
+  done()
 }
 
 function assertNotError(t, done) {
-  testHath('Oh Noes!!!', t, done).assertNotError(new Error('Oh Noes!!!'))
+  t.assertNotError(null)
+  t.assertNotError(undefined)
+  fails('Oh Noes!!!', t).assertNotError(new Error('Oh Noes!!!'))
+  done()
 }
 
 function assertThrows(t, done) {
-  testHath('Did not throw an error', t, done).assertThrows(function() {})
+  t.assertThrows(function() {
+    throw new Error('Oh Noes!')
+  })
+  fails('Did not throw an error', t).assertThrows(function() {})
+  done()
 }
 
 function assertThrowsMessage(t, done) {
-  testHath('Oh Noes!!! does not match /foo/', t, done).assertThrows(function() { throw new Error('Oh Noes!!!')}, /foo/)
+  t.assertThrows(function() {
+    throw new Error('Oh Noes!')
+  }, /Oh Noes/)
+  fails('Oh Noes!!! does not match /foo/', t).assertThrows(function() { throw new Error('Oh Noes!!!')}, /foo/)
+  done()
 }
 
-function testHath(expected, t, done) {
+function fails(expected, t) {
   return new Hath({
     fail: function(label, actual) {
       t.assert(actual === expected, format('"%s" != "%s"', actual, expected))
-      done()
     },
     pass: function(label) {
       t.assert(false, 'Did not fail')
-      done()
     }
   })
 }
@@ -53,6 +135,10 @@ function testHath(expected, t, done) {
 module.exports = Hath.suite('Hath Assert', [
   assertEquals,
   assertNotEquals,
+  assertGreater,
+  assertNotGreater,
+  assertLess,
+  assertNotLess,
   assertMatches,
   assertNotMatches,
   assertTruthy,
